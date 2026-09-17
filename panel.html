@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es" class="verificando">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nutri JF · Panel clínico</title>
+  <meta name="description" content="Panel clínico: preregistro antropométrico, cálculo de IMC e historial de consultas.">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <header class="barra">
+    <div class="barra__marca">
+      <span class="monograma" id="marca-iniciales">JF</span>
+      <div>
+        <h1 id="marca-nombre">Nutri JF</h1>
+        <span class="acceso__lema">Panel clínico</span>
+      </div>
+    </div>
+    <div class="barra__sesion">
+      <dl>
+        <dt>Nutriólogo en turno</dt>
+        <dd id="nutriologo-nombre">—</dd>
+      </dl>
+      <dl>
+        <dt>Fecha</dt>
+        <dd id="fecha-hoy">—</dd>
+      </dl>
+      <button type="button" class="boton boton--secundario" id="salir">Cerrar sesión</button>
+    </div>
+  </header>
+  <section class="resumen" aria-label="Resumen del consultorio">
+    <div class="resumen__dato">
+      <span class="resumen__cifra" id="dato-pacientes">0</span>
+      <span class="resumen__texto">Pacientes</span>
+    </div>
+    <div class="resumen__dato">
+      <span class="resumen__cifra" id="dato-consultas">0</span>
+      <span class="resumen__texto">Consultas</span>
+    </div>
+    <div class="resumen__dato">
+      <span class="resumen__cifra" id="dato-hoy">0</span>
+      <span class="resumen__texto">Consultas de hoy</span>
+    </div>
+  </section>
+  <main class="tablero">
+    <div class="columna">
+      <section class="tarjeta">
+        <div class="tarjeta__cabeza">
+          <div>
+            <h2>Preregistro antropométrico</h2>
+            <p>Las medidas se capturan una sola vez; el IMC se calcula solo.</p>
+          </div>
+        </div>
+        <p class="editando" id="editando-paciente" hidden></p>
+        <form id="forma-paciente" autocomplete="off">
+          <div class="campo">
+            <label for="paciente-nombre">Nombre del paciente</label>
+            <input id="paciente-nombre" type="text" placeholder="Ej. María Pérez Luna" required>
+          </div>
+          <div class="pareja">
+            <div class="campo">
+              <label for="paciente-edad">Edad (años)</label>
+              <input id="paciente-edad" type="number" min="1" max="120" step="1" placeholder="28" required>
+            </div>
+            <div class="campo">
+              <label for="paciente-sexo">Sexo</label>
+              <select id="paciente-sexo">
+                <option value="F">Femenino</option>
+                <option value="M">Masculino</option>
+                <option value="O">Otro</option>
+              </select>
+            </div>
+          </div>
+          <div class="pareja">
+            <div class="campo">
+              <label for="paciente-estatura">Estatura (cm)</label>
+              <input id="paciente-estatura" type="number" min="50" max="250" step="0.1" placeholder="165" required>
+            </div>
+            <div class="campo">
+              <label for="paciente-peso">Peso (kg)</label>
+              <input id="paciente-peso" type="number" min="10" max="400" step="0.1" placeholder="68.5" required>
+            </div>
+          </div>
+          <div class="acciones">
+            <button type="submit" class="boton" id="boton-paciente">Guardar paciente y calcular IMC</button>
+            <button type="button" class="boton boton--secundario" id="cancelar-paciente" hidden>Cancelar</button>
+          </div>
+        </form>
+        <div class="resultado" id="resultado-imc" hidden></div>
+        <div class="aviso" id="aviso-paciente" hidden></div>
+      </section>
+      <section class="tarjeta">
+        <div class="tarjeta__cabeza">
+          <div>
+            <h2>Expediente de pacientes</h2>
+            <p>Diagnóstico vigente según la última medición registrada.</p>
+          </div>
+        </div>
+        <div class="tabla-envoltura" id="tabla-pacientes"></div>
+      </section>
+    </div>
+    <div class="columna">
+      <section class="tarjeta">
+        <div class="tarjeta__cabeza">
+          <div>
+            <h2>Consulta del día</h2>
+            <p>Selecciona un paciente registrado y captura la nota clínica.</p>
+          </div>
+        </div>
+        <p class="editando" id="editando-consulta" hidden></p>
+        <form id="forma-consulta" autocomplete="off">
+          <div class="campo">
+            <label for="consulta-paciente">Paciente</label>
+            <select id="consulta-paciente" required></select>
+          </div>
+          <div class="pareja">
+            <div class="campo">
+              <label for="consulta-fecha">Fecha</label>
+              <input id="consulta-fecha" type="date" required>
+            </div>
+            <div class="campo">
+              <label for="consulta-hora">Hora</label>
+              <input id="consulta-hora" type="time" required>
+            </div>
+          </div>
+          <div class="campo">
+            <label for="consulta-evolucion">Evolución del paciente</label>
+            <textarea id="consulta-evolucion" rows="3" placeholder="Apego al plan, cambios de medidas, síntomas…" required></textarea>
+          </div>
+          <div class="campo">
+            <label for="consulta-plan">Plan de alimentación</label>
+            <textarea id="consulta-plan" rows="3" placeholder="Indicaciones, distribución de macros, recomendaciones…" required></textarea>
+          </div>
+          <div class="acciones">
+            <button type="submit" class="boton" id="boton-consulta">Agregar al historial</button>
+            <button type="button" class="boton boton--secundario" id="cancelar-consulta" hidden>Cancelar edición</button>
+          </div>
+        </form>
+        <div class="aviso" id="aviso-consulta" hidden></div>
+      </section>
+      <section class="tarjeta">
+        <div class="tarjeta__cabeza">
+          <div>
+            <h2>Historial clínico</h2>
+            <p>Las notas más recientes aparecen primero.</p>
+          </div>
+          <div class="filtro">
+            <label for="filtro-paciente">Filtrar</label>
+            <select id="filtro-paciente"></select>
+          </div>
+        </div>
+        <div class="historial" id="historial"></div>
+      </section>
+    </div>
+  </main>
+  <script type="module" src="js/paginas/panel.js"></script>
+</body>
+</html>

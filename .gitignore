@@ -1,0 +1,19 @@
+# Configuración local del editor
+.vscode/
+.idea/
+
+# Archivos del sistema operativo
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Dependencias y despliegue
+node_modules/
+.vercel/
+.netlify/
+
+# Registros temporales
+*.log
+
+# Documentacion local (no se publica)
+README.md

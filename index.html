@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es" class="verificando">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nutri JF · Acceso del personal clínico</title>
+  <meta name="description" content="Acceso al sistema de control nutricional de la clínica Nutri JF.">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <main class="acceso">
+    <div class="acceso__caja">
+      <div class="acceso__marca">
+        <span class="monograma" id="marca-iniciales">JF</span>
+        <div>
+          <h1 id="marca-nombre">Nutri JF</h1>
+          <span class="acceso__lema">Control nutricional clínico</span>
+        </div>
+      </div>
+      <section id="panel-acceso">
+        <h2 class="acceso__titulo">Inicio de sesión</h2>
+        <p class="acceso__texto">Firma tu entrada para que el sistema registre quién atiende cada consulta.</p>
+        <form id="forma-acceso" autocomplete="off">
+          <div class="campo">
+            <label for="acceso-usuario">Usuario</label>
+            <input id="acceso-usuario" type="text" placeholder="Ej. jfranco" required autofocus>
+          </div>
+          <div class="campo">
+            <label for="acceso-contrasena">Contraseña</label>
+            <input id="acceso-contrasena" type="password" placeholder="••••••••" required>
+          </div>
+          <div class="acciones">
+            <button type="submit" class="boton boton--bloque">Entrar al panel</button>
+          </div>
+        </form>
+        <p class="acceso__pie">
+          ¿Eres nuevo en la clínica?
+          <button type="button" class="enlace" id="ir-a-alta">Registrar nutriólogo</button>
+        </p>
+      </section>
+      <section id="panel-alta" hidden>
+        <h2 class="acceso__titulo">Registro de nutriólogo</h2>
+        <p class="acceso__texto">Crea la cuenta con la que firmarás tus consultas.</p>
+        <form id="forma-alta" autocomplete="off">
+          <div class="campo">
+            <label for="alta-nombre">Nombre completo</label>
+            <input id="alta-nombre" type="text" placeholder="Ej. Jorge Franco" required>
+          </div>
+          <div class="campo">
+            <label for="alta-usuario">Usuario</label>
+            <input id="alta-usuario" type="text" placeholder="Ej. jfranco" required>
+          </div>
+          <div class="pareja">
+            <div class="campo">
+              <label for="alta-contrasena">Contraseña</label>
+              <input id="alta-contrasena" type="password" placeholder="Mínimo 4" required minlength="4">
+            </div>
+            <div class="campo">
+              <label for="alta-confirmar">Confirmar</label>
+              <input id="alta-confirmar" type="password" placeholder="Repítela" required minlength="4">
+            </div>
+          </div>
+          <div class="acciones">
+            <button type="submit" class="boton boton--bloque">Crear cuenta</button>
+          </div>
+        </form>
+        <p class="acceso__pie">
+          ¿Ya tienes cuenta?
+          <button type="button" class="enlace" id="ir-a-acceso">Volver al inicio de sesión</button>
+        </p>
+      </section>
+      <div id="aviso-acceso" class="aviso" hidden></div>
+      <p class="acceso__nota">
+        Nutri JF &middot; Práctica 1, Unidad 2 &middot; <span id="anio"></span>
+      </p>
+    </div>
+  </main>
+  <script type="module" src="js/paginas/login.js"></script>
+</body>
+</html>
